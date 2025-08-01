@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Prueba Auth</title>
+</head>
+
+<body style="background-color: #333; color: #eee;">
+
+  <section style="border: 1px solid red;padding-left: 50px;">
+    <h1>Signup</h1>
+    <form id="signupForm">
+      <label>Nombre: <input type="text" name="name" value="admin123" /></label><br />
+      <label>Apellido: <input type="text" name="surname" value="admin123" /></label><br />
+      <label>Fecha de nacimiento: <input type="date" name="dateOfBirth" value="1990-05-10" /></label><br />
+      <label>Email: <input type="email" name="email" value="admin@example.com" /></label><br />
+      <label>Password: <input type="password" name="password" value="admin123" /></label><br />
+      <label>Rol:
+        <select name="role">
+          <option value="AGENTE" selected>AGENTE</option>
+          <option value="ADMIN">ADMIN</option>
+        </select>
+      </label><br />
+      <label>Activo: <input type="checkbox" name="activo" checked /></label><br />
+      <button type="submit">Signup</button>
+    </form>
+
+    <h1>Signin</h1>
+    <form id="signinForm">
+      <label>Email: <input type="email" name="email" value="admin@example.com" /></label><br />
+      <label>Password: <input type="password" name="password" value="admin123" /></label><br />
+      <button type="submit">Signin</button>
+    </form>
+  </section>
+
+
+  <section style="border: 1px solid red;padding-left: 50px;">
+
+    <h2>Crear Usuario (POST /users) - Requiere Auth</h2>
+
+    <label>Token Bearer (Authorization):</label><br />
+    <input type="text" id="token" size="60" value="tu_jwt_token_aqui" /><br /><br />
+
+    <form id="createUserForm">
+      <label>Nombre: <input type="text" name="name" value="Ana" /></label><br />
+      <label>Apellido: <input type="text" name="surname" value="Gomez" /></label><br />
+      <label>Fecha de nacimiento: <input type="date" name="dateOfBirth" value="1990-01-01" /></label><br />
+      <label>Email: <input type="email" name="email" value="ana.gomez@example.com" /></label><br />
+      <label>Password: <input type="password" name="password" value="12345678" /></label><br />
+      <label>Rol:
+        <select name="role">
+          <option value="AGENTE">AGENTE</option>
+          <option value="SUPERVISOR">SUPERVISOR</option>
+          <option value="ADMIN" selected>ADMIN</option>
+          <option value="SUPER_ADMIN">SUPER_ADMIN</option>
+        </select>
+      </label><br />
+      <label>Activo: <input type="checkbox" name="activo" checked /></label><br />
+      <button type="submit">Crear Usuario</button>
+    </form>
+
+    <pre id="result"></pre>
+
+    <script>
+      const form = document.getElementById('createUserForm')
+      const result = document.getElementById('result')
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault()
+
+        const token = document.getElementById('token').value.trim()
+        if (!token) {
+          result.textContent = 'Por favor ingresa un token válido.'
+          return
+        }
+
+        const formData = new FormData(form)
+        const data = Object.fromEntries(formData.entries())
+        // Checkbox comes as "on" or undefined, convertir a boolean:
+        data.activo = formData.get('activo') === 'on'
+
+        // Formatear fecha correctamente (input date es yyyy-MM-dd)
+        // No es necesario, pero ojo si usás otro formato
+
+        try {
+          const res = await fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(data)
+          })
+
+          const json = await res.json()
+          if (!res.ok) {
+            result.textContent = `Error ${res.status}: ${JSON.stringify(json)}`
+          } else {
+            result.textContent = JSON.stringify(json, null, 2)
+          }
+        } catch (err) {
+          result.textContent = 'Error de conexión: ' + err.message
+        }
+      });
+    </script>
+  </section>
+
+  <script>
+    const token = document.getElementById('token')
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const formData = new FormData(e.target)
+      const data = Object.fromEntries(formData.entries())
+      data.activo = formData.get('activo') === 'on' ? true : false
+
+      const res = await fetch('http://localhost:3000/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+
+      const json = await res.json()
+      token.value = json.access_token
+    })
+
+    document.getElementById('signinForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const formData = new FormData(e.target)
+      const data = Object.fromEntries(formData.entries())
+
+      const res = await fetch('http://localhost:3000/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+
+      const json = await res.json()
+      token.value = json.access_token
+    })
+  </script>
+</body>
+
+</html>

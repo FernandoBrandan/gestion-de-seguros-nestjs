@@ -1,8 +1,29 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from './app.module'
+import { ValidationPipe } from '@nestjs/common'
+import { AllExceptionsFilter } from './common/all-exceptions.filtert'
+
+import * as morgan from 'morgan'
+
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3000);
+  const app = await NestFactory.create(AppModule)
+
+  app.use(morgan('dev'))
+
+  // app.useGlobalFilters
+  // app.useGlobalGuards
+  // app.useGlobalInterceptors
+
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    transform: true
+  }))
+
+  app.enableCors()
+
+  app.useGlobalFilters(new AllExceptionsFilter())
+
+  await app.listen(process.env.PORT ?? 3000)
 }
-bootstrap();
+bootstrap()
