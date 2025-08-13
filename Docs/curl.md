@@ -26,7 +26,7 @@ curl -X POST http://localhost:3000/auth/signin \
 # Users
 
 ```sh
-curl -X POST http://localhost:3000/users \
+curl -X POST http://localhost:3000/api/users \
 -H "Content-Type: application/json" \
 -d '{
   "name": "Juan",

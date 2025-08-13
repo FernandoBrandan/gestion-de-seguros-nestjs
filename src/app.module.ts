@@ -29,8 +29,6 @@ import { AuthModule } from './auth/auth.module'
     InsurersModule,
 
     AuthModule,
-
-
   ],
   controllers: [],
   providers: [NotificationsService],

@@ -1,14 +1,14 @@
 ## ¿Qué es un Claim?
 
-Un **claim** es una **solicitud de indemnización** que hace el asegurado a la compañía de seguros cuando ocurre un evento cubierto por la póliza.
+Un claim es una solicitud de indemnización que hace el asegurado a la compañía de seguros cuando ocurre un evento cubierto por la póliza.
 
-**Ejemplo**: Tienes seguro de auto y chocas → presentas un claim para que te paguen la reparación.
+Ejemplo: Tienes seguro de auto y chocas → presentas un claim para que te paguen la reparación.
 
 ---
 
 ## Sistema de Gestión de Seguros - Desglose Completo
 
-### 1. **CONTRATOS (Pólizas)**
+### 1. CONTRATOS (Pólizas)
 
 ```
 Gestión de Pólizas:
@@ -27,7 +27,7 @@ Datos clave:
 - Prima (costo del seguro)
 ```
 
-### 2. **FACTURACIÓN MENSUAL**
+### 2. FACTURACIÓN MENSUAL
 
 ```
 Billing Engine:
@@ -45,7 +45,7 @@ Flujo típico:
 5. Si no paga → suspende póliza
 ```
 
-### 3. **CUANDO USUARIO NECESITA EL SERVICIO (Claims)**
+### 3. CUANDO USUARIO NECESITA EL SERVICIO (Claims)
 
 ```
 Proceso de Claims:
@@ -68,7 +68,7 @@ Tipos de claims:
 
 ## Arquitectura del Sistema de Seguros
 
-### **Microservicios Principales**
+### Microservicios Principales
 
 ```
 1. Policy Management Service
@@ -97,7 +97,7 @@ Tipos de claims:
    - Documentos
 ```
 
-### **Concurrencia Crítica**
+### Concurrencia Crítica
 
 ```
 Desafíos técnicos:
@@ -123,7 +123,7 @@ Desafíos técnicos:
    - Bulk operations para actualizaciones
 ```
 
-### **Flujo Completo de Ejemplo**
+### Flujo Completo de Ejemplo
 
 ```
 Escenario: Juan tiene seguro de auto y choca
@@ -150,4 +150,4 @@ Escenario: Juan tiene seguro de auto y choca
    - Actualiza historial del cliente
 ```
 
-**¿Te interesa profundizar en algún aspecto específico? ¿La arquitectura técnica, los algoritmos de pricing, el workflow de claims, o algo más?**
+¿Te interesa profundizar en algún aspecto específico? ¿La arquitectura técnica, los algoritmos de pricing, el workflow de claims, o algo más?
