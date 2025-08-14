@@ -1,4 +1,30 @@
-RELACIONES ENTRE MÓDULOS:
+
+# ¿Qué hacen en el mundo real?
+
+Las aseguradoras no giran TODAS alrededor de una única lógica de pólizas. 
+Usan sistemas modulares donde cada módulo tiene lógica de negocio independiente y especializada:
+
+Policy Management (emisión, renovación, cancelación)
+Claims Processing (reclamos, ajustes, pagos)
+Billing & Payments
+Underwriting (evaluación de riesgo)
+CRM / Atención al Cliente
+Quoting
+Comisiones, Documentación, Workflow, Reporting, etc.
+
+Cada uno de estos es un bounded context con su propio lenguaje y modelos. 
+Esa modularidad es la realidad, y DDD permite manejarla con gracia. (learn.microsoft.com–– especialmente párrafos sobre “policy workflow”, “auditing”, “billing”, etc.) 
+
+
+https://learn.microsoft.com/en-us/archive/msdn-magazine/2009/february/best-practice-an-introduction-to-domain-driven-design
+
+https://medium.com/%40curiousraj/introduction-to-domain-driven-design-ddd-in-insurance-5826bc8e3112
+
+https://devcookies.medium.com/domain-driven-design-a-practical-guide-to-building-better-software-1793f37f6850
+
+
+
+# RELACIONES ENTRE MÓDULOS:
 
 User → Puede crear/gestionar pólizas y customers
 Customer → Puede tener múltiples pólizas

@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
 import { UsersModule } from './users/users.module'
-import { PoliciesModule } from './policies/policies.module'
+import { PoliciesModule } from './context/policies/policies.module'
 import { NotificationsService } from './-/notifications/notifications.service'
-import { CustomersModule } from './customers/customers.module'
-import { InsurersModule } from './insurers/insurers.module'
+import { CustomersModule } from './context/customers/customers.module'
+import { InsurersModule } from './context/insurers/insurers.module'
 
 import { AuthModule } from './auth/auth.module'
 

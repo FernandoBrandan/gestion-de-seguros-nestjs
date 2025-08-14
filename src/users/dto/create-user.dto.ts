@@ -7,7 +7,7 @@ import {
     IsBoolean,
 } from 'class-validator'
 import { Type } from 'class-transformer'
-import { IUser } from '../user/user.interface'
+import { IUser } from '../user.interface'
 import { typeRole } from '../../common/role.enum'
 
 export class CreateUserDto implements IUser {
