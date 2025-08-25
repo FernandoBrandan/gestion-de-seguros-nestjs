@@ -1,131 +1,69 @@
-## ¿Qué es un Claim?
+# ¿Qué hacen en el mundo real?
 
-Un claim es una solicitud de indemnización que hace el asegurado a la compañía de seguros cuando ocurre un evento cubierto por la póliza.
+Las aseguradoras no giran TODAS alrededor de una única lógica de pólizas. 
+Usan sistemas modulares donde cada módulo tiene lógica de negocio independiente y especializada:
 
-Ejemplo: Tienes seguro de auto y chocas → presentas un claim para que te paguen la reparación.
+* **Administración de pólizas** (sobrevivencia, emisión, renovación, cancelación).
+* **Gestión de siniestros** (recepción, evaluación, liquidación, fraude).
+* **Facturación & pagos** (invoicing, cobros, conciliación).
+* **Suscripción / Underwriting** (evaluación de riesgo, primas).
+* **CRM / atención al cliente** (gestión de clientes, agentes, comunicaciones).
+* **Comisionamiento a agentes**.
+* **Cotización / Quotes** (previsiones antes de emitir una póliza).
+* **Comisiones**.
+* **Documentación y archivo**.
+* **Flujos de trabajo / automatización**.
+* **Reportes / dashboards**.
 
----
+Cada uno de estos es un bounded context con su propio lenguaje y modelos. 
+Esa modularidad es la realidad, y DDD permite manejarla con gracia. (learn.microsoft.com–– especialmente párrafos sobre “policy workflow”, “auditing”, “billing”, etc.) 
 
-## Sistema de Gestión de Seguros - Desglose Completo
+- Destaca módulos como “administración de pólizas”, “claims”, “CRM”, “billing”, “underwriting”, “reporting”, etc. Esto permite escalabilidad, integración isotécnica, y despliegues independientes en cada parte del negocio.
+- - [Link](https://www.decerto.com/post/key-components-of-modular-architecture-for-insurance-systems?utm_source=chatgpt.com)
+- La industria de seguros es compleja: requiere manejar underwriting, múltiples líneas de producto, costes, fraude, normativas… DDD ayuda a gestionar esa complejidad alineando software con el negocio.
+- - [Link](https://medium.com/%40curiousraj/introduction-to-domain-driven-design-ddd-in-insurance-5826bc8e3112?utm_source=chatgpt.com)
+- Se modelan agregados como `Policy`, `Claim`, `Payment`, para mantener consistencia y transacciones disciplinadas.
+- Se usan eventos de dominio (e.g., `ClaimSubmitted`) para orquestar flujos entre módulos (fraude, notificaciones, pagos).
+- - [Link](https://medium.com/%40curiousraj/why-p-c-insurance-needs-domain-driven-design-ddd-d46ef74f7de3?utm_source=chatgpt.com)
+- - [Link](https://en.wikipedia.org/wiki/Guidewire_Software?utm_source=chatgpt.com)
 
-### 1. CONTRATOS (Pólizas)
 
-```
-Gestión de Pólizas:
-- Cotización: Cálculo de prima según riesgo
-- Emisión: Generación del contrato
-- Renovación: Proceso automático/manual
-- Modificaciones: Cambios en cobertura
-- Cancelación: Terminación del contrato
+- [Link](https://learn.microsoft.com/en-us/archive/msdn-magazine/2009/february/best-practice-an-introduction-to-domain-driven-design)
 
-Datos clave:
-- Asegurado (persona/empresa)
-- Bien asegurado (auto, casa, vida)
-- Coberturas incluidas
-- Deducibles y límites
-- Vigencia (inicio/fin)
-- Prima (costo del seguro)
-```
+- [Link](https://medium.com/%40curiousraj/introduction-to-domain-driven-design-ddd-in-insurance-5826bc8e3112)
 
-### 2. FACTURACIÓN MENSUAL
+- [Link](https://devcookies.medium.com/domain-driven-design-a-practical-guide-to-building-better-software-1793f37f6850)
 
-```
-Billing Engine:
-- Cálculo de prima mensual/anual
-- Generación automática de facturas
-- Procesamiento de pagos
-- Manejo de mora y suspensiones
-- Comisiones a brokers/agentes
-
-Flujo típico:
-1. Sistema calcula prima del mes
-2. Genera factura automáticamente
-3. Envía por email/correo
-4. Procesa pago (tarjeta/débito/banco)
-5. Si no paga → suspende póliza
-```
-
-### 3. CUANDO USUARIO NECESITA EL SERVICIO (Claims)
-
-```
-Proceso de Claims:
-1. Reporte del siniestro
-2. Asignación de ajustador
-3. Investigación/evaluación
-4. Determinación de cobertura
-5. Cálculo de indemnización
-6. Pago al asegurado
-
-Tipos de claims:
-- Auto: Choques, robos, daños
-- Hogar: Incendios, robos, inundaciones
-- Vida: Fallecimiento, invalidez
-- Salud: Hospitalización, cirugías
-- Empresarial: Responsabilidad civil
-```
 
 ---
 
-## Arquitectura del Sistema de Seguros
+### Perspectivas de desarrolladores
 
-### Microservicios Principales
+Lo que piensan en Reddit, para traerlo más terrenal:
 
-```
-1. Policy Management Service
-   - CRUD de pólizas
-   - Cálculo de primas
-   - Renovaciones automáticas
+- “La aplicación consistente de DDD hace el desarrollo predecible... la complejidad se maneja bien”
+- “Los equipos llegan y en par de semanas ya están arreglando errores de un microservicio sin conocer todo el sistema”
+[Link](https://www.reddit.com/r/softwarearchitecture/comments/1i6dru3?utm_source=chatgpt.com)
 
-2. Billing Service
-   - Facturación recurrente
-   - Procesamiento de pagos
-   - Manejo de mora
+Pero también aparecen advertencias:
 
-3. Claims Management Service
-   - Reporte de siniestros
-   - Workflow de investigación
-   - Cálculo de indemnizaciones
+- “DDD no es una bala de plata… puede convertirse en espagueti si hay poco testing o plazos apurados.”
+[Link](https://www.reddit.com/r/dotnet/comments/rwqole?utm_source=chatgpt.com)
 
-4. Underwriting Service
-   - Evaluación de riesgos
-   - Aprobación de pólizas
-   - Pricing dinámico
+---
 
-5. Customer Service
-   - Portal del cliente
-   - Notificaciones
-   - Documentos
-```
 
-### Concurrencia Crítica
+# Sistema de Gestión de Seguros - Desglose Completo
 
-```
-Desafíos técnicos:
+## RELACIONES ENTRE MÓDULOS:
 
-1. Cálculo de Primas:
-   - Parallel processing por tipo de seguro
-   - Cache distribuido para tablas actuariales
-   - Async validation de datos del cliente
+User → Puede crear/gestionar pólizas y customers
+Customer → Puede tener múltiples pólizas
+Poliza → Referencia a Customer (como tomador/asegurado) y User (quien la gestiona)
 
-2. Billing Masivo:
-   - Batch processing para millones de pólizas
-   - Queue-based para retry de pagos fallidos
-   - Distributed locks para evitar doble facturación
+## Flujo Completo de Ejemplo
 
-3. Claims Processing:
-   - Workflow engine para diferentes tipos
-   - Async document processing (fotos, PDFs)
-   - Real-time fraud detection con ML
 
-4. Renewals:
-   - Scheduled jobs para renovaciones masivas
-   - Event-driven notifications
-   - Bulk operations para actualizaciones
-```
-
-### Flujo Completo de Ejemplo
-
-```
 Escenario: Juan tiene seguro de auto y choca
 
 1. PÓLIZA ACTIVA:
@@ -148,6 +86,30 @@ Escenario: Juan tiene seguro de auto y choca
    - Indemnización: $3,000 - $500 (deducible) = $2,500
    - Sistema genera cheque/transferencia
    - Actualiza historial del cliente
-```
 
-¿Te interesa profundizar en algún aspecto específico? ¿La arquitectura técnica, los algoritmos de pricing, el workflow de claims, o algo más?
+# Otros adicionales
+
+## Archivo / Documentación (Document)
+
+- PDF de la póliza, documentación del siniestro, fotos, etc.
+
+## Comisión (Commission)
+
+- Cálculo y liquidación de comisiones para agentes.
+
+## Cotización (Quote) - tabla paralela a policy
+
+- Paso previo a la emisión de una póliza.
+- Muestra una simulación con opciones.
+
+# Extra: Entidades transversales (más técnicas)
+
+- Notificación (Notification) – para alertas por correo, SMS, etc.
+- Auditoría / Logs (AuditLog) – quién modificó qué.
+- Tarea / Workflow (Task) – si manejás flujos automáticos de aprobación o revisión.
+
+## Por ejemplo:
+
+- Un Customer tiene muchas Policies
+- Una Policy está asociada a un Product, tiene muchas Coverages, puede tener Claims y Payments
+- Un Claim tiene Documents

@@ -4,7 +4,7 @@ import {
     Column,
     OneToOne,
 } from 'typeorm'
-import { Policy } from './policy.entity'
+import { Policy } from '../policies/domain/entities/policy.entity'
 
 export enum PaymentFrequency {
     ANNUAL = 'ANNUAL',

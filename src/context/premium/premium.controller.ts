@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Headers } from '@nestjs/common'
 import { PremiumService } from '../../services/premium.service'
-import { CreatePremiumDto } from '../../dto/create-premium.dto'
-import { UpdatePremiumDto } from '../../dto/update-premium.dto'
+import { CreatePremiumDto } from '../../../premium/create-premium.dto'
+import { UpdatePremiumDto } from '../../../premium/update-premium.dto'
 
 @Controller('premiums')
 export class PremiumController {

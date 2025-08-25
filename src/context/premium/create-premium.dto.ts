@@ -8,7 +8,7 @@ import {
     IsPositive
 } from 'class-validator'
 import { Type, Transform } from 'class-transformer'
-import { IPremium, PaymentFrequency } from '../domain/interfaces/premium.interface'
+import { IPremium, PaymentFrequency } from './premium.interface'
 
 export class CreatePremiumDto implements IPremium {
     @IsNumber({ maxDecimalPlaces: 2 })

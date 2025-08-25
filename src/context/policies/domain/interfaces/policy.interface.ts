@@ -1,7 +1,7 @@
 import { IInsuredObject } from './insuredObject.interface'
 import { ICoverage } from './coverage.interface'
 import { IExclusion } from './exclusion.interface'
-import { IPremium } from './premium.interface'
+import { IPremium } from '../../../premium/premium.interface'
 import { IClaim } from './claim.interface'
 import { IPayment } from './payment.interface'
 

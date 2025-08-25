@@ -8,7 +8,7 @@ import { Policy } from '../domain/entities/policy.entity'
 import { InsuredObject } from '../domain/entities/insuredObject.entity'
 import { Coverage } from '../domain/entities/coverage.entity'
 import { Exclusion } from '../domain/entities/exclusion.entity'
-import { Premium } from '../domain/entities/premium.entity'
+import { Premium } from '../../premium/premium.entity'
 import { Payment } from '../domain/entities/payment.entity'
 import { Claim } from '../domain/entities/claim.entity'
 

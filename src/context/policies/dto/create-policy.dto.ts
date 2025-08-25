@@ -19,7 +19,7 @@ import { Type, Transform } from 'class-transformer'
 import { CreateInsuredObjectDto } from './create-insuredObject.dto'
 import { CreateCoverageDto } from './create-coverage.dto'
 import { CreateExclusionDto } from './create-exclusion.dto'
-import { CreatePremiumDto } from './create-premium.dto'
+import { CreatePremiumDto } from '../../premium/create-premium.dto'
 import { CreatePaymentDto } from './create-payment.dto'
 import { CreateClaimDto } from './create-claim.dto'
 

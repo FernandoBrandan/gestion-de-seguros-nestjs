@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { CreatePremiumDto } from '../dto/create-premium.dto'
-import { UpdatePremiumDto } from '../dto/update-premium.dto'
+import { CreatePremiumDto } from '../../premium/create-premium.dto'
+import { UpdatePremiumDto } from '../../premium/update-premium.dto'
 
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Premium } from '../domain/entities/premium.entity'
+import { Premium } from '../../premium/premium.entity'
 
 @Injectable()
 export class PremiumService {

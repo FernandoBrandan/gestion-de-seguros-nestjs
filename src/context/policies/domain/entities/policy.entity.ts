@@ -19,7 +19,7 @@ import { Insurer } from '../../../insurers/entities/insurer.entity'
 import { Coverage } from './coverage.entity'
 import { Exclusion } from './exclusion.entity'
 import { Payment } from './payment.entity'
-import { Premium } from './premium.entity'
+import { Premium } from '../../../premium/premium.entity'
 import { Claim } from './claim.entity'
 import { InsuredObject } from './insuredObject.entity'
 

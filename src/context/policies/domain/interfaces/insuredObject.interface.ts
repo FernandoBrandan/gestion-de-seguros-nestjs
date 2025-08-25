@@ -37,3 +37,14 @@ export enum InsuranceType {
     LIABILITY = 'LIABILITY',
     COMMERCIAL = 'COMMERCIAL'
 }
+
+// plantillas de coberturas
+// https://123seguro.com.ar/aseguradoras
+// Tipo A B C 
+
+// Tipo A
+// Cubre minimas cosas
+// Tipo B
+// Cubre mas cosas
+// Tipo C
+// Cubre todo
