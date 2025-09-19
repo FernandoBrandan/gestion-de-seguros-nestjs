@@ -5,7 +5,7 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
-import { User } from './user.entity'
+import { User } from './entities/user.entity'
 
 @Injectable()
 export class UsersService {
@@ -46,11 +46,12 @@ export class UsersService {
   }
 
   async findByEmailWithPassword(email: string): Promise<User> {
-    const user = await this.userRepository.findOne({
-      where: { email },
-      select: ['_id', 'name', 'email', 'role', 'password']
-    })
-    if (!user) throw new NotFoundException(`User with email ${email} not found`)
+    const user = await this.userRepository.findOneBy({ email })
+    // const user = await this.userRepository.findOne({
+    //   where: { email },
+    //   select: ['_id', 'name', 'email', 'role', 'password']
+    // })
+    // if (!user) throw new NotFoundException(`User with email ${email} not found`)
     return user
   }
 

@@ -9,7 +9,8 @@ import {
     Min,
 } from 'class-validator'
 import { Type } from 'class-transformer'
-import { ICustomer, typeIdentification } from '../customer/customer.interface'
+import { typeIdentification } from '@/common/types/identificationType'
+import { ICustomer } from '@/common/interfaces/customer.interface'
 
 export class CreateCustomerDto implements ICustomer {
     @IsString()

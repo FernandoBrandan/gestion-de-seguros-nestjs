@@ -16,3 +16,5 @@ services:
 
 volumes:
   postgres_data:
+# docker exec -it nest_postgres bash
+# psql -U postgres -d mydb

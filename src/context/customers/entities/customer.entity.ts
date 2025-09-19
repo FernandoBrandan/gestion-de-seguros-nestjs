@@ -1,6 +1,16 @@
-// customer.entity.ts
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
-import { ICustomer, typeIdentification } from "../customer/customer.interface"
+import { ICustomer } from "@/common/interfaces/customer.interface"
+import { typeIdentification } from '@/common/types/identificationType'
+
+// domains/customer/entities/Customer.js
+// class Customer {
+//     constructor(id, personalData, contactInfo, riskProfile) {
+//         this.id = id
+//         this.personalData = personalData // nombre, documento, etc.
+//         this.contactInfo = contactInfo
+//         this.riskProfile = riskProfile // historial de siniestros, etc.
+//     }
+// }
 
 @Entity('customers')
 export class Customer implements ICustomer {

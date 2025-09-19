@@ -9,6 +9,30 @@
 <body style="background-color: #333; color: #eee;">
 
   <section style="border: 1px solid red;padding-left: 50px;">
+    <table class="center" style="width: 50%; border-collapse: collapse; text-align: left;">
+      <tr style="background-color: #555;">
+        <th>Modules</th>
+        <th>Steps</th>
+      </tr>
+      <tr>
+        <td>Users</td>
+        <td>Register, Login</td>
+      </tr>
+      <tr>
+        <td>Customers</td>
+        <td>CRUD</td>
+      </tr>
+      <tr>
+        <td>Insured-Objects</td>
+        <td>CRUD</td>
+      </tr>
+      <tr>
+        <td>Generate Quote</td>
+        <td>Get base, set personalized</td>
+      </tr>
+    </table>
+  </section>
+  <section style="border: 1px solid red;padding-left: 50px;">
     <h1>Signup</h1>
     <form id="signupForm">
       <label>Nombre: <input type="text" name="name" value="admin123" /></label><br />
@@ -112,9 +136,10 @@
       e.preventDefault()
       const formData = new FormData(e.target)
       const data = Object.fromEntries(formData.entries())
+      console.log(data)
       data.activo = formData.get('activo') === 'on' ? true : false
 
-      const res = await fetch('http://localhost:3000/auth/signup', {
+      const res = await fetch('http://localhost:3000/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -129,7 +154,10 @@
       const formData = new FormData(e.target)
       const data = Object.fromEntries(formData.entries())
 
-      const res = await fetch('http://localhost:3000/auth/signin', {
+
+      console.log(data)
+
+      const res = await fetch('http://localhost:3000/api/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
